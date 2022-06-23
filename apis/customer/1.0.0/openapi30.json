@@ -1,0 +1,137 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Customer",
+    "description" : "No description",
+    "version" : "1.0.0"
+  },
+  "paths" : {
+    "/customer/{id}" : {
+      "get" : {
+        "summary" : "Get customer by ID",
+        "description" : "Get customer information by its ID",
+        "parameters" : [ {
+          "name" : "Content-Type",
+          "in" : "header",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "application/json"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status Code 200",
+            "headers" : {
+              "Content-Type" : {
+                "required" : false,
+                "schema" : {
+                  "type" : "string"
+                },
+                "example" : "application/json"
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/customer"
+                },
+                "example" : "{\"customer\":{\"AverageResolutionDays\":2,\"Priority\":\"Low\",\"SFDC_accountId\":100001,\"OpenTickets\":0,\"CreditCard\":\"1212-1221-1121-1234\",\"Name\":\"Abernathy-Bernier\",\"BillingState\":\"Virginia\",\"BillingPostalCode\":75565,\"Phone\":\"740-714-1041\",\"Industry\":\"Agriculture & Forestry\",\"CreatedDate\":\"15-03-2021\",\"LastDelivery__c\":\"21-01-2021\",\"EmailContact__c\":\"dexter.yundt@yahoo.com\"}}"
+              }
+            }
+          },
+          "404" : {
+            "description" : "Status Code 404",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "customer" : {
+                      "type" : "object",
+                      "properties" : {
+                        "message" : {
+                          "type" : "string",
+                          "description" : "Error message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Priority" : {
+        "type" : "string",
+        "description" : "Priority level",
+        "enum" : [ "Low", "Moderate", "High" ]
+      },
+      "customer" : {
+        "type" : "object",
+        "description" : "Customer generic JSON document",
+        "properties" : {
+          "customer" : {
+            "type" : "object",
+            "properties" : {
+              "AverageResolutionDays" : {
+                "type" : "number",
+                "description" : "Average number of days support resolved open issues for the given customer"
+              },
+              "Priority" : {
+                "$ref" : "#/components/schemas/Priority"
+              },
+              "SFDC_accountId" : {
+                "type" : "number"
+              },
+              "OpenTickets" : {
+                "type" : "number"
+              },
+              "CreditCard" : {
+                "type" : "string"
+              },
+              "Name" : {
+                "type" : "string"
+              },
+              "BillingState" : {
+                "type" : "string"
+              },
+              "BillingPostalCode" : {
+                "type" : "number"
+              },
+              "Phone" : {
+                "type" : "string"
+              },
+              "Industry" : {
+                "type" : "string"
+              },
+              "CreatedDate" : {
+                "type" : "string"
+              },
+              "LastDelivery__c" : {
+                "type" : "string"
+              },
+              "EmailContact__c" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "example" : "{\"customer\":{\"AverageResolutionDays\":2,\"Priority\":\"Low\",\"SFDC_accountId\":100001,\"OpenTickets\":0,\"CreditCard\":\"1212-1221-1121-1234\",\"Name\":\"Abernathy-Bernier\",\"BillingState\":\"Virginia\",\"BillingPostalCode\":75565,\"Phone\":\"740-714-1041\",\"Industry\":\"Agriculture & Forestry\",\"CreatedDate\":\"15-03-2021\",\"LastDelivery__c\":\"21-01-2021\",\"EmailContact__c\":\"dexter.yundt@yahoo.com\"}}"
+      }
+    }
+  }
+}
